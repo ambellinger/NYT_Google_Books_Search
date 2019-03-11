@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import DeleteBtn from "../components/DeleteBtn";
+import SaveBtn from "../components/SaveBtn";
+import ViewBtn from "../components/ViewBtn"
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
+
 
 class Books extends Component {
   state = {
@@ -57,10 +60,21 @@ class Books extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-6">
-            <Jumbotron>
-              <h1>What Books Should I Read?</h1>
+          <Col size="md-12">
+
+          {/* Jumbotron Logo Area */}
+          <Jumbotron>
+              <h1>(React) Google Book Search</h1>
+              <h3> Search for and Save Books of Interest</h3>
             </Jumbotron>
+          </Col>
+        </Row>
+
+        {/* Book Search Form */}
+        <Row>
+          <Col size="md-12">
+          <h4>Book Search</h4>
+          <h5>Book</h5>
             <form>
               <Input
                 value={this.state.title}
@@ -68,7 +82,7 @@ class Books extends Component {
                 name="title"
                 placeholder="Title (required)"
               />
-              <Input
+              {/* <Input
                 value={this.state.author}
                 onChange={this.handleInputChange}
                 name="author"
@@ -79,29 +93,39 @@ class Books extends Component {
                 onChange={this.handleInputChange}
                 name="synopsis"
                 placeholder="Synopsis (Optional)"
-              />
+              /> */}
+
               <FormBtn
-                disabled={!(this.state.author && this.state.title)}
+                // disabled={!(this.state.author && this.state.title)}
+                disabled={!(this.state.title)}
                 onClick={this.handleFormSubmit}
               >
                 Submit Book
               </FormBtn>
             </form>
           </Col>
-          <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Books On My List</h1>
-            </Jumbotron>
+        </Row>
+
+        {/* Results */}
+        <Row>  
+          <Col size="md-12">
+          <h4>Results</h4>
             {this.state.books.length ? (
               <List>
                 {this.state.books.map(book => (
                   <ListItem key={book._id}>
                     <Link to={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
+                      <h5>
+                        {book.title} 
+                      </h5>
+                      Written by {book.author}
                     </Link>
-                    <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                    <p>
+                    {book.synopsis}
+                    </p>
+                    <SaveBtn />
+                    <ViewBtn />
+                    {/* <DeleteBtn onClick={() => this.deleteBook(book._id)} /> */}
                   </ListItem>
                 ))}
               </List>
