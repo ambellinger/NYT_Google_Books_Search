@@ -1,0 +1,8 @@
+nav {
+    border-bottom: 5px solid black !important;
+}
+
+.nav-link {
+    color: black;
+    float: left;
+}
