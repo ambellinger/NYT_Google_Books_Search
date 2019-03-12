@@ -7,12 +7,14 @@ import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
+import { Input, FormBtn } from "../components/Form";
 
 
 class Books extends Component {
   state = {
     books: [],
+    subtitle: "",
+    image: "",
     title: "",
     author: "",
     synopsis: ""
@@ -123,10 +125,8 @@ class Books extends Component {
                       </h6>
                       Written by {book.author}
                     </Link>
-                    <div>
-                      {book.image}
-                    </div>
                     <p>
+                    <img src={book.image}/>
                     {book.synopsis}
                     </p>
                     <SaveBtn />
