@@ -25,7 +25,7 @@ class Books extends Component {
   loadBooks = () => {
     API.getBooks()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ books: res.data, title: "", subtitle: "", image: "", author: "", synopsis: "" })
       )
       .catch(err => console.log(err));
   };
@@ -118,14 +118,20 @@ class Books extends Component {
                       <h5>
                         {book.title} 
                       </h5>
+                      <h6>
+                      {book.subtitle}
+                      </h6>
                       Written by {book.author}
                     </Link>
+                    <div>
+                      {book.image}
+                    </div>
                     <p>
                     {book.synopsis}
                     </p>
                     <SaveBtn />
                     <ViewBtn />
-                    {/* <DeleteBtn onClick={() => this.deleteBook(book._id)} /> */}
+                     <DeleteBtn onClick={() => this.deleteBook(book._id)} /> 
                   </ListItem>
                 ))}
               </List>
